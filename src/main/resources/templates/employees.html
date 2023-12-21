@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<ol>
+    <!--    <li th:each="employeeObject: ${MyModelContainer} " th:text="${employeeObject}">Dummy employeeObject</li>-->
+    <div class="col-8 col-sm-10 mx-auto mt-5 mb-5">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">Email</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employeeObject: ${responseEmployee} ">
+                <th th:text="${employeeObject.id}" scope="row">1</th>
+                <td th:text="${employeeObject.firstName}">Mark</td>
+                <td th:text="${employeeObject.lastName}">Otto</td>
+                <td th:text="${employeeObject.email}">Otto</td>
+                <td th:text="${{employeeObject.dob}}">@mdo</td>
+                <td th:text="${{employeeObject.salary}}">@mdo</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(responseEmployee)}">
+                <td colspan="8" class="text-center">No data</td>
+            </tr>
+            <tr th:remove="all">
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr th:remove="all">
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+            </tr>
+            </tbody>
+
+        </table>
+        <h1>Firm Employees</h1>
+
+        <!--        Employee is a current employee object class in lower case which we send via second modelAttribute-->
+        <form th:object="${employee}" method="post">
+            <!--            <div class="mb-3">-->
+            <!--                <label for="formID" class="form-label">ID</label>-->
+            <!--                <input type="email" class="form-control" id="formID" th:field="*{id}" aria-describedby="emailHelp">-->
+            <!--                &lt;!&ndash;            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>&ndash;&gt;-->
+            <!--            </div>-->
+            <div class="mb-3">
+                <label for="formFirstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="formFirstName" th:field="*{firstName}"
+                       aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3 ">
+                <label for="formLastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="formLastName" th:field="*{lastName}"
+                       aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 ">
+                <label for="formEmail" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="formEmail" th:field="*{email}"
+                       aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 ">
+                <label for="formDOB" class="form-label">DOB</label>
+                <input type="date" class="form-control" id="formDOB" th:field="*{dob}" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3 ">
+                <label for="formSalary" class="form-label">Salary</label>
+                <input type="number" class="form-control" id="formSalary" th:field="*{salary}"
+                       aria-describedby="emailHelp">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+</ol>
+</body>
+</html>
